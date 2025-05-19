@@ -1,53 +1,55 @@
-
 import express from "express";
 import cors from "cors";
 import path from "path";
+import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
-import Router_cor from "./routes/medawar.js";
-import users_Router from "./routes/users.js"
-
+import productRouter from "./routes/product.js";
+import newUserRouter from "./routes/newuser.js";
 import dotenv from "dotenv";
+
+const __dirname = path.resolve();
+
 dotenv.config();
 
-
-// const __dirname = path.resolve();
-
-
-
-import mongoose from "mongoose";
 const app = express();
 const port = 3000;
 
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")))
-
-
+// eslint-disable-next-line no-undef
 const url = process.env.Eslam_A;
 
-mongoose.connect(url).then((a) => {
-  console.log("mongodb");
-}).catch((err)=>{
-  console.log("err",err);
-  
-})
+mongoose
+  .connect(url)
+  .then(() => {
+    console.log("mongodb...........");
+  })
 
+  .catch((err) => {
+    console.log("err-mongodb---> ", err);
+    // eslint-disable-next-line no-undef
+    process.exit(1);
+  });
 
-// app.use(cors());
-// app.use(express.json());
-app.use("/", Router_cor);
-// app.use("/", users_Router);
+app.use(cookieParser());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-
-
-// app.all("*", (req, res, next) => {
-
-//   return res.send("ooooooooooooo All * not found");
-// });
-
-// app.use((er, req, res, next) => {
-//   console.log("error358")
-
-//   res.status(er.statecode || 500).json({state:"Error", Data:er.statetext, message: er.message})
-// });
+app.use("/newUser", newUserRouter);
+// app.use("/Api/users", users_Router);
+app.use("/Api/corses", productRouter);
+// eslint-disable-next-line no-unused-vars
+app.all("*", (req, res, next) => {
+  return res.send("ooooooooooooo All * not found");
+});
+// eslint-disable-next-line no-unused-vars
+app.use((er, req, res, next) => {
+  // console.log("error358", er);
+  res
+    .status(er.statuscode || 500)
+    .json({ state: "Error", Data: er.statuscode, message: er.message });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

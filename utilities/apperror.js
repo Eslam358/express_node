@@ -3,10 +3,11 @@ class ErrorApp extends Error {
     super();
   }
 
-  creat(message, statuscode, statustext) {
+  creat(message, statuscode, statusText) {
     (this.message = message),
       (this.statuscode = statuscode),
-      (this.statustext = statustext);
+      (this.statusText = statusText);
+console.log("error----", this.message);
 
     return this;
   }

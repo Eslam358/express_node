@@ -25,17 +25,18 @@ const post_user = asyncFun(async (req, res, next) => {
     email: req.body.email,
     role: req.body.role,
   });
+  
 
-  const newCorse = new users({
+  const newUser = new users({
     ...req.body,
     password,
     avatar: req.file.filename,
   });
   // console.log("req.filenamm",req.filenamm);
   console.log("req.file", req.file.filename);
-  newCorse.token = token;
-  await newCorse.save();
-  res.json(newCorse);
+  newUser.token = token;
+  await newUser.save();
+  res.json(newUser);
 });
 // ----------------------------------------------------------------------------------------
 

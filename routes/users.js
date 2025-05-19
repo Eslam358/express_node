@@ -38,8 +38,6 @@ const fileFilter = function (req, file, cb) {
     cb(error, false);
   }
 };
-// console.log("storage", storage);
-// const upload = multer({ dest: 'uploads/' })
 const upload = multer({ storage: diskStorage, fileFilter: fileFilter });
 
 // -----------------------------------------------------------------------------
@@ -47,12 +45,16 @@ const upload = multer({ storage: diskStorage, fileFilter: fileFilter });
 const usres_Router = Router();
 
 usres_Router.get(
-  "/users",
-  test_token,
+  "/",
   all_owed_token("Admin", "Manger"),
+
+  
+  test_token,
   getUsers
 );
-usres_Router.post("/users", upload.single("avatar"), post_user);
-usres_Router.post("/user", log_user);
+usres_Router.post("/user", post_user);
+usres_Router.post("/user", upload.single("avatar"), post_user);
+// usres_Router.post("/user", log_user);
+
 
 export default usres_Router;

@@ -1,15 +1,16 @@
 import { Schema, model } from "mongoose";
-
-const kittySchema = new Schema({
+// "products";
+const productSchema = new Schema({
   name: {
     type: String,
-    require: true,
+
+    required: [true, "Name is required"],
   },
   price: {
     type: String,
-    require: true,
+    required: [true, "price is required"],
   },
 });
 
-const mondo = model("mondo", kittySchema);
+const mondo = model("productSchema", productSchema);
 export default mondo;

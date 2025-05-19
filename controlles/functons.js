@@ -7,8 +7,9 @@ import asyncFun from "../middleware/asyncwrapper.js";
 
 const get_All_products = asyncFun(async (req, res) => {
   const limit = req.query.limit || 4;
-  const skip = req.query.skip ? (req.query.skip - 1) * limit : limit;
-  const posts = await mondo.find({}, { __v: false }).limit(limit).skip(skip);
+  const skip = req.query.skip ? (req.query.skip - 1) * limit : 0;
+
+  const posts = await mondo.find( { __v: false }).limit(limit).skip(skip);
   res.json({
     status: "success",
     data: {
@@ -33,11 +34,12 @@ const get_product = asyncFun(async (req, res, next) => {
 
 // .......................................................................................
 
-const post_product = asyncFun(async (req, res) => {
+const post_product = async (req, res) => {
   const newCorse = new mondo(req.body);
-  await newCorse.save();
+  const AA = await newCorse.save();
+  console.log("post_product2:::", AA);
   res.json(newCorse);
-});
+};
 
 // .......................................................................................
 
@@ -48,7 +50,7 @@ const patch_product = asyncFun(async (req, res) => {
       $set: { ...req.body },
     }
   );
-  console.log("erroAAr", req.params.id);
+  console.log("erroAAr", req.params.id, req.body);
   return res.send(AA);
 });
 // .......................................................................................

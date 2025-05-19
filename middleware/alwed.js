@@ -4,8 +4,8 @@ export default (...AA) => {
   
   return (req, res, next) => {
     const token = req.token_T;
-    if (!AA.includes(token.role)) {
-      const error = ErrorApp.creat("not token token, !token", 404, "false");
+    if ( !AA.includes(token.role)) {
+      const error = ErrorApp.creat(" something rouge", 404, "false");
       return next(error);
     }
     
