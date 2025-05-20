@@ -40,7 +40,7 @@ app.use("/newUser", newUserRouter);
 // app.use("/Api/users", users_Router);
 app.use("/Api/corses", productRouter);
 // eslint-disable-next-line no-unused-vars
-app.all("*", (req, res, next) => {
+app.all("*", (req, res) => {
   return res.send("ooooooooooooo All * not found");
 });
 // eslint-disable-next-line no-unused-vars
@@ -48,7 +48,7 @@ app.use((er, req, res, next) => {
   // console.log("error358", er);
   res
     .status(er.statuscode || 500)
-    .json({ state: "Error", Data: er.statuscode, message: er.message });
+    .json({ state: "End---Error", Data: er.statuscode, message: er.message });
 });
 
 app.listen(port, () => {

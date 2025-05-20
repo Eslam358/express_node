@@ -4,7 +4,7 @@ import error from "../utilities/apperror.js";
 import token from "../utilities/token_JWT.js";
 import bcrypt from "bcryptjs";
 import multer from "multer";
-import { register } from "../controlles/fu_new_user.js";
+import { register } from "../controller/fu_new_user.js";
 import { registerValidator,loginValidator, validationResult_fun } from "../utilities/validator.js";
 
 const newUserRouter = Router();

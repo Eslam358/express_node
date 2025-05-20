@@ -44,6 +44,14 @@ export const productValidator = [
     .isLength({ min: 3 })
     .withMessage("min price"),
 ];
+export const productValidatorPatch = [
+  body("name")
+    .optional()
+
+    .isLength({ min: 3 })
+    .withMessage("min name"),
+  body("price").optional().isLength({ min: 3 }).withMessage("min price"),
+];
 
 // ------------------- functionality -------------------
 export async function validationResult_fun(req, res, next) {
