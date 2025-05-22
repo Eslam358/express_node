@@ -49,7 +49,7 @@ app.use((er, req, res, next) => {
   // console.log("error358", er);
   res
     .status(er.statuscode || 500)
-    .json({ state: "End---Error", Data: er.statuscode, message: er.message });
+    .json({ state: "End->->-Error", Data: er.statuscode, message: er.message ,error:er});
 });
 
 app.listen(port, () => {
